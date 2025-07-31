@@ -1,16 +1,16 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FaLandmark, FaUsers, FaChartLine } from 'react-icons/fa';
+import React from "react";
+import { motion } from "framer-motion";
+import { FaLandmark, FaUsers, FaChartLine } from "react-icons/fa";
 
 const Hero = () => {
   const containerVariants = {
     hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.3 } }
+    show: { opacity: 1, transition: { staggerChildren: 0.3 } },
   };
 
   const fadeUp = {
     hidden: { opacity: 0, y: 40 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+    show: { opacity: 1, y: 0, transition: { duration: 0.8 } },
   };
 
   return (
@@ -18,7 +18,7 @@ const Hero = () => {
       className="relative w-full min-h-screen bg-no-repeat bg-top bg-contain flex flex-col justify-center"
       style={{
         backgroundImage: "url('/images/logo-bg.png')",
-        backgroundColor: "#fff"
+        backgroundColor: "#fff",
       }}
     >
       {/* Overlay */}
@@ -51,11 +51,11 @@ const Hero = () => {
             className="inline-block mt-6 bg-yellow-800 text-white px-6 py-3 rounded font-semibold text-lg shadow-md cursor-pointer"
             whileHover={{
               scale: 1.1,
-              backgroundColor: '#92400e',
-              boxShadow: '0px 8px 20px rgba(0,0,0,0.3)'
+              backgroundColor: "#92400e",
+              boxShadow: "0px 8px 20px rgba(0,0,0,0.3)",
             }}
             whileTap={{ scale: 0.95 }}
-            transition={{ type: 'spring', stiffness: 300 }}
+            transition={{ type: "spring", stiffness: 300 }}
           >
             Join Us
           </motion.a>
@@ -71,19 +71,19 @@ const Hero = () => {
           {[
             {
               icon: <FaLandmark size={40} />,
-              title: 'Our Heritage',
-              desc: 'Preserving and celebrating the rich cultural legacy of Etsu Baba and our ancestral heritage.'
+              title: "Our Heritage",
+              desc: "Preserving and celebrating the rich cultural legacy of Etsu Baba and our ancestral heritage.",
             },
             {
               icon: <FaUsers size={40} />,
-              title: 'Unity',
-              desc: 'Strengthening bonds among descendants and fostering collaborative initiatives for collective progress.'
+              title: "Unity",
+              desc: "Strengthening bonds among descendants and fostering collaborative initiatives for collective progress.",
             },
             {
               icon: <FaChartLine size={40} />,
-              title: 'Progress',
-              desc: 'Driving sustainable development and empowerment through innovative community programs.'
-            }
+              title: "Progress",
+              desc: "Driving sustainable development and empowerment through innovative community programs.",
+            },
           ].map((item, i) => (
             <motion.div
               key={i}
@@ -91,10 +91,10 @@ const Hero = () => {
               variants={fadeUp}
               whileHover={{
                 scale: 1.05,
-                boxShadow: '0px 10px 25px rgba(0,0,0,0.15)'
+                boxShadow: "0px 10px 25px rgba(0,0,0,0.15)",
               }}
               whileTap={{ scale: 0.95 }} // ✅ Added tap effect
-              transition={{ type: 'spring', stiffness: 200 }}
+              transition={{ type: "spring", stiffness: 200 }}
             >
               <div className="text-yellow-800 mb-4">{item.icon}</div>
               <h3 className="text-xl font-bold mb-2">{item.title}</h3>
