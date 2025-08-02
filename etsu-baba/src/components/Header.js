@@ -1,28 +1,29 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const links = [
-    { name: "Home", href: "#home" },
-    { name: "About Us", href: "#about" },
-    { name: "Our History", href: "#history" },
-    { name: "Activities", href: "#activities" },
-    { name: "Gallery", href: "#gallery" },
-    { name: "Contact Us", href: "#contact" },
+    { name: "Home", path: "/" },
+    { name: "About Us", path: "/about" },
+    { name: "Our History", path: "/history" },
+    { name: "Activities", path: "/activities" },
+    { name: "Gallery", path: "/gallery" },
+    { name: "Contact Us", path: "/contact" },
   ];
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-white shadow-md z-50 px-4 py-3 flex items-center justify-between">
-      <div className="flex items-center">
+    <header className="fixed top-0 left-0 w-full bg-white shadow-md z-50 px-2 sm:px-3 md:px-4 py-2.5 flex items-center justify-between gap-2 sm:gap-3 md:gap-4">
+      <div className="flex items-center flex-shrink-0 min-w-0">
         <button
-          className="xl:hidden mr-4 text-yellow-800 focus:outline-none"
+          className="xl:hidden mr-1.5 sm:mr-2 text-yellow-800 focus:outline-none"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? (
             <svg
-              className="w-7 h-7"
+              className="w-5 h-5 sm:w-6 sm:h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -36,7 +37,7 @@ const Header = () => {
             </svg>
           ) : (
             <svg
-              className="w-7 h-7"
+              className="w-5 h-5 sm:w-6 sm:h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -50,44 +51,37 @@ const Header = () => {
             </svg>
           )}
         </button>
-        <div className="w-12 h-12 rounded overflow-hidden">
+
+        <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded overflow-hidden flex-shrink-0">
           <img
             src="/images/logo.png"
             alt="Logo"
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="ml-3 text-yellow-800 font-bold leading-tight font-montserrat">
-          <span className="block text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
+
+        <div className="ml-1.5 sm:ml-2 md:ml-3 text-yellow-800 font-bold font-montserrat min-w-0">
+          <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl leading-tight truncate">
             ETSU BABA
-          </span>
-          <span className="block text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl">
+          </p>
+          <p className="text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg leading-tight whitespace-nowrap">
             PROGRESSIVE FOUNDATION
-          </span>
+          </p>
         </div>
       </div>
 
-      {/* Desktop Navigation */}
-      <nav className="hidden xl:flex space-x-8 text-yellow-800 font-medium font-montserrat">
-        {links.map((link, index) => (
-          <motion.a
-            key={index}
-            href={link.href}
-            className="hover:underline"
-            whileHover={{ scale: 1.1, color: "#92400e" }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            {link.name}
-          </motion.a>
-        ))}
-      </nav>
+      <div className="flex items-center gap-2 sm:gap-3 md:gap-4 xl:gap-6">
+        <nav className="hidden xl:flex space-x-3 xl:space-x-5 text-yellow-800 font-medium font-montserrat">
+          {links.map((link, index) => (
+            <div key={index}>
+              <Link to={link.path} className="hover:underline">
+                {link.name}
+              </Link>
+            </div>
+          ))}
+        </nav>
 
-      {/* Join Us Button */}
-      <div className="flex items-center">
-        <motion.a
-          href="#join"
-          className="bg-yellow-800 text-white px-4 py-2 rounded text-sm md:text-base whitespace-nowrap font-montserrat cursor-pointer"
+        <motion.div
           whileHover={{
             scale: 1.1,
             boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)",
@@ -95,30 +89,34 @@ const Header = () => {
           }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 300 }}
+          className="xl:ml-6" // Increased margin for desktop
         >
-          Join Us
-        </motion.a>
+          <Link
+            to="/about"
+            className="bg-yellow-800 text-white px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 md:py-2 rounded text-[11px] sm:text-xs md:text-sm lg:text-base whitespace-nowrap font-montserrat cursor-pointer min-w-[80px] sm:min-w-[90px] text-center"
+          >
+            Learn More
+          </Link>
+        </motion.div>
       </div>
 
-      {/* Mobile Navigation */}
       <nav
-        className={`xl:hidden absolute top-16 left-4 right-4 bg-white shadow-lg rounded-lg p-4 transform transition-all duration-300 ${
+        className={`xl:hidden absolute top-14 sm:top-16 left-2 right-2 sm:left-3 sm:right-3 bg-white shadow-lg rounded-lg p-3 transform transition-all duration-300 ${
           isMobileMenuOpen
             ? "opacity-100 scale-100"
             : "opacity-0 scale-95 pointer-events-none"
         }`}
       >
         {links.map((link, index) => (
-          <motion.a
-            key={index}
-            href={link.href}
-            className="block text-yellow-800 hover:underline py-2 font-montserrat"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            {link.name}
-          </motion.a>
+          <div key={index}>
+            <Link
+              to={link.path}
+              className="block text-yellow-800 hover:underline py-1.5 font-montserrat text-sm"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {link.name}
+            </Link>
+          </div>
         ))}
       </nav>
     </header>
