@@ -60,7 +60,9 @@ const AboutUs = () => {
             <div className="mb-4 text-yellow-800 group-hover:text-white flex justify-center">
               {item.icon}
             </div>
-            <h3 className="text-xl font-bold mb-2 group-hover:text-white">{item.title}</h3>
+            <h3 className="text-xl font-bold mb-2 group-hover:text-white">
+              {item.title}
+            </h3>
             <p className="text-gray-600 group-hover:text-white">{item.desc}</p>
           </motion.div>
         ))}
@@ -79,8 +81,8 @@ const AboutUs = () => {
         <p className="text-gray-600 text-lg">
           We are a close-knit family of descendants from the great Etsu Baba,
           united by shared heritage, values, and commitment to community
-          development. Our goal is to honor our past while shaping a
-          progressive future.
+          development. Our goal is to honor our past while shaping a progressive
+          future.
         </p>
       </motion.div>
 
@@ -121,8 +123,12 @@ const AboutUs = () => {
               <div className="mb-4 text-yellow-800 group-hover:text-white flex justify-center">
                 {item.icon}
               </div>
-              <h3 className="text-xl font-bold mb-2 group-hover:text-white">{item.title}</h3>
-              <p className="text-gray-600 group-hover:text-white">{item.desc}</p>
+              <h3 className="text-xl font-bold mb-2 group-hover:text-white">
+                {item.title}
+              </h3>
+              <p className="text-gray-600 group-hover:text-white">
+                {item.desc}
+              </p>
             </motion.div>
           ))}
         </div>
@@ -141,21 +147,21 @@ const AboutUs = () => {
             viewport={{ once: true }}
           >
             <motion.div
-              className="absolute left-[-3.5px] top-[0px] w-6 h-6 bg-yellow-800 rounded-full"
+              className="absolute left-[-8px] top-[0px] w-6 h-6 bg-yellow-800 rounded-full"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0, duration: 0.2 }}
               viewport={{ once: true }}
             />
             <motion.div
-              className="absolute left-[-3.5px] top-[110px] sm:top-[130px] w-6 h-6 bg-yellow-800 rounded-full"
+              className="absolute left-[-8px] top-[110px] sm:top-[130px] w-6 h-6 bg-yellow-800 rounded-full"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.67, duration: 0.2 }}
               viewport={{ once: true }}
             />
             <motion.div
-              className="absolute left-[-3.5px] top-[220px] sm:top-[260px] w-6 h-6 bg-yellow-800 rounded-full"
+              className="absolute left-[-8px] top-[220px] sm:top-[260px] w-6 h-6 bg-yellow-800 rounded-full"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 1.33, duration: 0.2 }}
