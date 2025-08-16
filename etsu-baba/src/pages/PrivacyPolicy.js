@@ -1,6 +1,4 @@
 import React from "react";
-import { FiInfo, FiShield, FiShare2, FiMail, FiLock } from "react-icons/fi";
-import { MdOutlinePolicy } from "react-icons/md";
 
 export default function PrivacyPolicy() {
   return (
