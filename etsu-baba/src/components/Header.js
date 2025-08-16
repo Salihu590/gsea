@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -73,11 +73,17 @@ const Header = () => {
       <div className="flex items-center gap-2 sm:gap-3 md:gap-4 xl:gap-6">
         <nav className="hidden xl:flex space-x-3 xl:space-x-5 text-yellow-800 font-medium font-montserrat">
           {links.map((link, index) => (
-            <div key={index}>
-              <Link to={link.path} className="hover:underline">
-                {link.name}
-              </Link>
-            </div>
+            <NavLink
+              key={index}
+              to={link.path}
+              className={({ isActive }) =>
+                `hover:underline px-1 transition-colors ${
+                  isActive ? "text-yellow-800 font-bold border-b-2 border-yellow-800" : ""
+                }`
+              }
+            >
+              {link.name}
+            </NavLink>
           ))}
         </nav>
 
@@ -89,14 +95,14 @@ const Header = () => {
           }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 300 }}
-          className="xl:ml-6" // Increased margin for desktop
+          className="xl:ml-6"
         >
-          <Link
+          <NavLink
             to="/about"
             className="bg-yellow-800 text-white px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 md:py-2 rounded text-[11px] sm:text-xs md:text-sm lg:text-base whitespace-nowrap font-montserrat cursor-pointer min-w-[80px] sm:min-w-[90px] text-center"
           >
             Learn More
-          </Link>
+          </NavLink>
         </motion.div>
       </div>
 
@@ -108,15 +114,18 @@ const Header = () => {
         }`}
       >
         {links.map((link, index) => (
-          <div key={index}>
-            <Link
-              to={link.path}
-              className="block text-yellow-800 hover:underline py-1.5 font-montserrat text-sm"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {link.name}
-            </Link>
-          </div>
+          <NavLink
+            key={index}
+            to={link.path}
+            className={({ isActive }) =>
+              `block py-1.5 font-montserrat text-sm ${
+                isActive ? "text-yellow-800 font-bold border-l-4 border-yellow-800 pl-2" : "text-yellow-800"
+              }`
+            }
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            {link.name}
+          </NavLink>
         ))}
       </nav>
     </header>

@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { FaTimes, FaChevronLeft, FaChevronRight, FaCamera } from "react-icons/fa";
+import {
+  FaTimes,
+  FaChevronLeft,
+  FaChevronRight,
+  FaCamera,
+} from "react-icons/fa";
 
 const Gallery = () => {
   const galleryItems = [
@@ -7,11 +12,20 @@ const Gallery = () => {
       src: "/images/gallery1.jpg",
       desc: "Historical portrait of the great Etsu Baba, founder of our lineage",
     },
-    { src: "/images/gallery2.jpg", desc: "Youth members engaging in cultural discussions" },
+    {
+      src: "/images/gallery2.jpg",
+      desc: "Youth members engaging in cultural discussions",
+    },
     { src: "/images/gallery3.jpg", desc: "Community women’s group meeting" },
     { src: "/images/gallery4.jpg", desc: "Family heritage celebration" },
-    { src: "/images/gallery5.jpg", desc: "Annual foundation meeting in January" },
-    { src: "/images/gallery6.jpg", desc: "Leaders strategizing on future plans" },
+    {
+      src: "/images/gallery5.jpg",
+      desc: "Annual foundation meeting in January",
+    },
+    {
+      src: "/images/gallery6.jpg",
+      desc: "Leaders strategizing on future plans",
+    },
     { src: "/images/gallery7.jpg", desc: "Cultural dance and festivities" },
     { src: "/images/gallery8.jpg", desc: "Descendants united for progress" },
     { src: "/images/gallery9.jpg", desc: "Children learning heritage values" },
@@ -28,11 +42,15 @@ const Gallery = () => {
   const closeLightbox = () => setIsOpen(false);
 
   const prevImage = () => {
-    setCurrentIndex((prev) => (prev === 0 ? galleryItems.length - 1 : prev - 1));
+    setCurrentIndex((prev) =>
+      prev === 0 ? galleryItems.length - 1 : prev - 1
+    );
   };
 
   const nextImage = () => {
-    setCurrentIndex((prev) => (prev === galleryItems.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) =>
+      prev === galleryItems.length - 1 ? 0 : prev + 1
+    );
   };
 
   return (

@@ -96,9 +96,6 @@ const Footer = () => {
                 <Link to="/membership">Membership</Link>
               </li>
               <li>
-                <Link to="/volunteer">Volunteer</Link>
-              </li>
-              <li>
                 <Link to="/newsletter">Newsletter</Link>
               </li>
             </ul>

@@ -10,7 +10,6 @@ import ContactUs from "./pages/ContactUs";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Membership from "./pages/Membership";
-import Volunteer from "./pages/Volunteer";
 import Newsletter from "./pages/Newsletter";
 
 function App() {
@@ -86,14 +85,6 @@ function App() {
           element={
             <Layout>
               <Membership />
-            </Layout>
-          }
-        />
-        <Route
-          path="/volunteer"
-          element={
-            <Layout>
-              <Volunteer />
             </Layout>
           }
         />
