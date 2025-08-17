@@ -16,7 +16,7 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-4">
               <img
-                src="/images/logo.png"
+                src="https://res.cloudinary.com/dblqwnq79/image/upload/v1755440204/logo_uhqrwx.jpg"
                 alt="Etsu Baba Progressive Foundation Logo"
                 className="w-12 h-12 rounded-full object-cover"
               />

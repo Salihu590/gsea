@@ -19,7 +19,7 @@ const Hero = () => {
       <section
         className="relative w-full h-auto bg-no-repeat bg-top bg-contain flex flex-col justify-center"
         style={{
-          backgroundImage: "url('/images/logo-bg.png')",
+          backgroundImage: "url('https://res.cloudinary.com/dblqwnq79/image/upload/v1755440204/logo_uhqrwx.jpg')",
           backgroundColor: "#fff",
         }}
       >

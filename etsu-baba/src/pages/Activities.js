@@ -9,11 +9,11 @@ const Activities = () => {
   };
 
   const images = [
-    "/images/january-meeting-1.jpg",
-    "/images/january-meeting-2.jpg",
-    "/images/january-meeting-3.jpg",
-    "/images/january-meeting-4.jpg",
-    "/images/january-meeting-5.jpg",
+    "https://res.cloudinary.com/dblqwnq79/image/upload/v1755439225/WhatsApp_Image_2025-08-05_at_20.03.53_319aff47_c2nefj.jpg",
+    "https://res.cloudinary.com/dblqwnq79/image/upload/v1755439319/WhatsApp_Image_2025-08-05_at_20.03.52_094b121e_bpasaf.jpg",
+    "https://res.cloudinary.com/dblqwnq79/image/upload/v1755439394/WhatsApp_Image_2025-08-05_at_20.03.53_319aff47_dai67q.jpg",
+    "https://res.cloudinary.com/dblqwnq79/image/upload/v1755439535/january-meeting-4_kxlzdv.jpg",
+    "https://res.cloudinary.com/dblqwnq79/image/upload/v1755439394/WhatsApp_Image_2025-08-05_at_20.03.53_319aff47_dai67q.jpg",
   ];
 
   const [current, setCurrent] = useState(0);

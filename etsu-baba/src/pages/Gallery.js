@@ -6,31 +6,32 @@ import {
   FaCamera,
 } from "react-icons/fa";
 
-const Gallery = () => {
-  const galleryItems = [
-    {
-      src: "/images/gallery1.jpg",
-      desc: "Historical portrait of the great Etsu Baba, founder of our lineage",
-    },
-    {
-      src: "/images/gallery2.jpg",
-      desc: "Youth members engaging in cultural discussions",
-    },
-    { src: "/images/gallery3.jpg", desc: "Community women’s group meeting" },
-    { src: "/images/gallery4.jpg", desc: "Family heritage celebration" },
-    {
-      src: "/images/gallery5.jpg",
-      desc: "Annual foundation meeting in January",
-    },
-    {
-      src: "/images/gallery6.jpg",
-      desc: "Leaders strategizing on future plans",
-    },
-    { src: "/images/gallery7.jpg", desc: "Cultural dance and festivities" },
-    { src: "/images/gallery8.jpg", desc: "Descendants united for progress" },
-    { src: "/images/gallery9.jpg", desc: "Children learning heritage values" },
-  ];
+const galleryItems = [
+  {
+    
+    src: "https://res.cloudinary.com/dblqwnq79/image/upload/v1755438750/gallery1_a_vflip_lntizl.png",
+    desc: "Our amazing team member", 
+  },
+  {
+    src: "https://res.cloudinary.com/dblqwnq79/image/upload/v1755438750/gallery1_a_vflip_lntizl.png",
+    desc: "Youth members engaging in cultural discussions",
+  },
+  { src: "https://res.cloudinary.com/dblqwnq79/image/upload/v1755438750/gallery1_a_vflip_lntizl.png", desc: "Community women’s group meeting" },
+  { src: "https://res.cloudinary.com/dblqwnq79/image/upload/v1755438750/gallery1_a_vflip_lntizl.png", desc: "Family heritage celebration" },
+  {
+    src: "https://res.cloudinary.com/dblqwnq79/image/upload/v1755438750/gallery1_a_vflip_lntizl.png",
+    desc: "Annual foundation meeting in January",
+  },
+  {
+    src: "https://res.cloudinary.com/dblqwnq79/image/upload/v1755438750/gallery1_a_vflip_lntizl.png",
+    desc: "Leaders strategizing on future plans",
+  },
+  { src: "https://res.cloudinary.com/dblqwnq79/image/upload/v1755438750/gallery1_a_vflip_lntizl.png", desc: "Cultural dance and festivities" },
+  { src: "https://res.cloudinary.com/dblqwnq79/image/upload/v1755438750/gallery1_a_vflip_lntizl.png", desc: "Descendants united for progress" },
+  { src: "https://res.cloudinary.com/dblqwnq79/image/upload/v1755438750/gallery1_a_vflip_lntizl.png", desc: "Children learning heritage values" },
+];
 
+const Gallery = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 

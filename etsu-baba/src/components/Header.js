@@ -54,7 +54,7 @@ const Header = () => {
 
         <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded overflow-hidden flex-shrink-0">
           <img
-            src="/images/logo.png"
+            src="https://res.cloudinary.com/dblqwnq79/image/upload/v1755440204/logo_uhqrwx.jpg"
             alt="Logo"
             className="w-full h-full object-cover"
           />
