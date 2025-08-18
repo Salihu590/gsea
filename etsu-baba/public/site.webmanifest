@@ -3,12 +3,12 @@
   "short_name": "EBPF",
   "icons": [
     {
-      "src": "/android-chrome-192x192.png",
+      "src": "https://res.cloudinary.com/dblqwnq79/image/upload/v1755529657/android-chrome-192x192_vw9olk.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/android-chrome-512x512.png",
+      "src": "https://res.cloudinary.com/dblqwnq79/image/upload/v1755529696/android-chrome-512x512_uitcyu.png",
       "sizes": "512x512",
       "type": "image/png"
     }
