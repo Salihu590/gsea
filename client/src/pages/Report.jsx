@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import L from "leaflet";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -54,8 +55,10 @@ export default function Report() {
   const [searchResults, setSearchResults] = useState([]);
   const [showMap, setShowMap] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const searchTimeoutRef = useRef(null);
   const formRef = useRef(null);
+  const navigate = useNavigate(); // Initialize navigate hook
 
   useEffect(() => {
     const savedDraft = localStorage.getItem("reportDraft");
@@ -210,11 +213,82 @@ export default function Report() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted with location:", location || manualLocation);
-    localStorage.removeItem("reportDraft");
+    setSubmitting(true);
+    
+    // Get form data from the form reference
+    const formData = new FormData(formRef.current);
+    const data = {};
+    for (let [key, value] of formData.entries()) {
+      data[key] = value;
+    }
+
+    // Extract symptoms and environment factors into arrays
+    const symptoms = Object.keys(data)
+      .filter(key => key.startsWith('symptom-') && data[key] === 'on')
+      .map(key => key.substring('symptom-'.length));
+      
+    const environment = Object.keys(data)
+      .filter(key => key.startsWith('env-') && data[key] === 'on')
+      .map(key => key.substring('env-'.length));
+      
+    // --- Validation Logic ---
+    if (!location && !manualLocation.trim()) {
+      alert("Please specify a location by using the map, searching, or using your current location.");
+      setSubmitting(false);
+      return;
+    }
+
+    if (symptoms.length === 0 && data.otherSymptoms.trim() === '') {
+      alert("Please select at least one symptom or specify 'Other' symptoms.");
+      setSubmitting(false);
+      return;
+    }
+
+    if (environment.length === 0 && data.otherEnvironment.trim() === '') {
+      alert("Please select at least one environmental factor or specify 'Other' factors.");
+      setSubmitting(false);
+      return;
+    }
+
+    // Create the final payload to send to the server
+    const reportData = {
+      ageGroup: data.ageGroup,
+      symptoms,
+      environment,
+      symptomDuration: data.symptomDuration,
+      location: location || { lat: null, lng: null, text: manualLocation },
+    };
+
+    try {
+      const response = await fetch("http://localhost:3001/api/report", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reportData),
+      });
+
+      if (response.ok) {
+        // Replace alert with navigation
+        navigate("/results", { state: reportData });
+        localStorage.removeItem("reportDraft");
+        formRef.current.reset();
+        setLocation(null);
+        setManualLocation("");
+      } else {
+        const result = await response.json();
+        alert(`Failed to submit report: ${result.message}`);
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("An error occurred. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
+
 
   return (
     <div className="max-w-5xl mx-auto p-6 lg:p-12">
@@ -267,6 +341,14 @@ export default function Report() {
                   <span>{symptom}</span>
                 </label>
               ))}
+              <label className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  name={`symptom-None`}
+                  className="h-4 w-4 text-green-600"
+                />
+                <span>None</span>
+              </label>
             </div>
             <h4 className="font-semibold text-gray-900 mb-4">Respiratory</h4>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
@@ -336,6 +418,14 @@ export default function Report() {
                   <span>{risk}</span>
                 </label>
               ))}
+              <label className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  name={`env-None`}
+                  className="h-4 w-4 text-green-600"
+                />
+                <span>None</span>
+              </label>
             </div>
             <h4 className="font-semibold text-gray-900 mb-4">
               Mosquito/bite risks
@@ -562,8 +652,9 @@ export default function Report() {
         <button
           type="submit"
           className="w-full py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition"
+          disabled={submitting}
         >
-          Submit Report
+          {submitting ? "Submitting..." : "Submit Report"}
         </button>
       </form>
       <p className="mt-6 text-sm text-gray-500 text-center">
