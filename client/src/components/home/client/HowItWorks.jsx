@@ -20,22 +20,39 @@ export default function HowItWorks() {
     },
   ];
 
+  const cardVariants = {
+    initial: { opacity: 0, y: 30 },
+    animate: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.15, duration: 0.5, type: "spring" },
+    }),
+  };
+
   return (
-    <section className="w-full bg-gray-50 py-16">
+    <section className="w-full bg-gradient-to-b from-gray-50 to-white py-20">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 text-center">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-black mb-4">
           How It Works
         </h2>
-        <div className="w-24 h-1 bg-green-600 mx-auto mb-12 rounded-full"></div>
+        <div className="w-24 h-1 bg-green-600 mx-auto mb-14 rounded-full"></div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {steps.map((step, i) => (
             <motion.div
               key={i}
+              custom={i}
+              variants={cardVariants}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition text-center"
+              className="relative p-8 bg-white rounded-2xl shadow-md hover:shadow-xl border border-gray-100 transition"
             >
+              <span className="absolute -top-4 -left-4 bg-green-600 text-white w-10 h-10 flex items-center justify-center font-bold rounded-full shadow-md">
+                {i + 1}
+              </span>
               <div className="flex justify-center mb-6">{step.icon}</div>
               <h3 className="text-xl font-semibold text-black">{step.title}</h3>
               <p className="mt-3 text-gray-600 text-base">{step.desc}</p>

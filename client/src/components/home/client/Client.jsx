@@ -21,24 +21,39 @@ export default function Impact() {
     },
   ];
 
+  const fadeIn = {
+    initial: { opacity: 0, y: 30 },
+    whileInView: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.15, duration: 0.6, type: "spring" },
+    }),
+  };
+
   return (
-    <section className="w-full bg-green-100 py-16">
+    <section className="w-full bg-gradient-to-b from-green-50 to-green-100 py-20">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 text-center">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-black">
           Why Participate?
         </h2>
         <div className="w-24 h-1 bg-green-600 mx-auto my-6 rounded-full"></div>
-        <p className="text-gray-700 text-base sm:text-lg max-w-2xl mx-auto">
+
+        <p className="text-gray-700 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
           Every report strengthens the health of your community and the world.
         </p>
 
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {items.map((item, i) => (
             <motion.div
               key={i}
+              custom={i}
+              variants={fadeIn}
+              initial="initial"
+              whileInView="whileInView"
+              viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="p-8 bg-white rounded-2xl shadow-md hover:shadow-2xl hover:shadow-green-500/50 transition duration-300 text-center"
+              className="p-8 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-lg transition duration-300 text-center"
             >
               <div className="flex justify-center mb-6">{item.icon}</div>
               <h3 className="text-xl font-semibold text-black">{item.title}</h3>
@@ -47,10 +62,10 @@ export default function Impact() {
           ))}
         </div>
 
-        <div className="mt-12">
+        <div className="mt-14">
           <Link
             to="/report"
-            className="inline-block px-8 py-3 bg-green-600 text-white font-semibold rounded-full shadow-md hover:bg-green-700 hover:shadow-lg transition"
+            className="inline-block px-10 py-4 bg-green-600 text-white font-semibold rounded-full shadow-md hover:bg-green-700 hover:shadow-lg transition"
           >
             Start Reporting Now
           </Link>

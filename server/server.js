@@ -281,6 +281,95 @@ app.patch("/api/report/:id/assign", async (req, res) => {
   }
 });
 
+
+app.get("/api/ai/predict-outbreak", async (req, res) => {
+  try {
+    const NOW = new Date();
+ 
+    const ONE_DAY_AGO = new Date(NOW.getTime() - 24 * 60 * 60 * 1000); 
+
+    // 1. Fetch recent reports (last 24 hours)
+    const recentReports = await Report.find({
+      timestamp: { $gte: ONE_DAY_AGO, $lte: NOW },
+    }).lean();
+
+    // 2. Check for the minimum number of data points (5 reports)
+    if (recentReports.length < 5) {
+      return res.status(200).json({
+        success: true,
+        message: "Not enough recent data to predict. Need at least 5 reports from the last 24 hours.",
+        predictions: [],
+      });
+    }
+
+    // 3. Find clusters based on location and symptom similarity
+    const clusters = {};
+    recentReports.forEach((report) => {
+      // Create a key by rounding coordinates to cluster nearby reports
+      const locationKey = `${Math.round(report.location.lat * 100) / 100}-${
+        Math.round(report.location.lng * 100) / 100
+      }`;
+      if (!clusters[locationKey]) {
+        clusters[locationKey] = {
+          count: 0,
+          lat: 0,
+          lng: 0,
+          symptoms: new Set(),
+        };
+      }
+      clusters[locationKey].count++;
+      clusters[locationKey].lat += report.location.lat;
+      clusters[locationKey].lng += report.location.lng;
+      report.symptoms.forEach((symptom) =>
+        clusters[locationKey].symptoms.add(symptom)
+      );
+    });
+
+    // 4. Identify the highest-risk clusters by sorting
+    const sortedClusters = Object.keys(clusters)
+      .map(key => {
+        const cluster = clusters[key];
+        const score = cluster.count + cluster.symptoms.size;
+        return {
+          ...cluster,
+          score,
+          avgLat: cluster.lat / cluster.count,
+          avgLng: cluster.lng / cluster.count
+        };
+      })
+      .sort((a, b) => b.score - a.score);
+
+    // Get the top 3 clusters, as a balance between too many and too few predictions
+    const topClusters = sortedClusters.slice(0, 3);
+
+    if (topClusters.length === 0 || topClusters[0].score < 5) {
+      return res.status(200).json({
+        success: true,
+        message: "No significant clusters detected in the recent data.",
+        predictions: [],
+      });
+    }
+
+    // 5. Predict the next locations based on the top clusters
+    const predictions = topClusters.map(cluster => {
+      // Simple random offset for prediction, simulating a spread
+      const nextPredictedLat = cluster.avgLat + (Math.random() - 0.5) * 0.05;
+      const nextPredictedLng = cluster.avgLng + (Math.random() - 0.5) * 0.05;
+      return { lat: nextPredictedLat, lng: nextPredictedLng };
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Multiple outbreak trends detected!",
+      predictions,
+    });
+  } catch (err) {
+    console.error("Outbreak prediction failed:", err);
+    res.status(500).json({ success: false, message: "Server error." });
+  }
+});
+
+
 io.on("connection", (socket) => {
   socket.on("disconnect", (reason) => {});
   socket.on("error", (error) => {});
